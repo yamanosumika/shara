@@ -1,0 +1,14 @@
+{
+  "name": "SHARA",
+  "short_name": "SHARA",
+  "description": "ローカルで使うGraph設計ツール",
+  "lang": "ja",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#efede7",
+  "theme_color": "#286b64",
+  "icons": [
+    { "src": "./shara-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

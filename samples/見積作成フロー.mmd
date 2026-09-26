@@ -1,0 +1,25 @@
+flowchart LR
+  subgraph group_estimate_editor_0001["見積編集"]
+    node_create_00000002["見積作成"]
+    node_start_00000001(["開始"])
+  end
+  subgraph group_estimate_storage_0001["保存処理"]
+    node_decide_00000003{"初回保存か？"}
+    node_issue_00000004["4文字コード発行"]
+    node_keep_00000005["既存コード維持"]
+    node_save_00000006["見積保存"]
+  end
+  node_db_00000007[("見積DB")]
+  node_create_00000002 -->|"次へ"| node_decide_00000003
+  node_decide_00000003 -->|"はい / 初回保存である"| node_issue_00000004
+  node_decide_00000003 -->|"いいえ / 初回保存ではない"| node_keep_00000005
+  node_issue_00000004 -->|"次へ"| node_save_00000006
+  node_keep_00000005 -->|"次へ"| node_save_00000006
+  node_save_00000006 -->|"書き込む / 保存"| node_db_00000007
+  node_start_00000001 -->|"次へ"| node_create_00000002
+  classDef start fill:#e3f4e8,stroke:#2f7650,color:#183d2b
+  classDef decision fill:#fff1c9,stroke:#9c6a00,color:#4b3400
+  classDef database fill:#e7eefb,stroke:#496a9d,color:#1e3150
+  class node_start_00000001 start
+  class node_decide_00000003 decision
+  class node_db_00000007 database

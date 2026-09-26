@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/yamanosumika/shara/blob/main/docs/shara.schema.json",
+  "title": "SharaDocument",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format", "schemaVersion", "id", "semantic", "presentation", "metadata"],
+  "properties": {
+    "format": { "const": "shara" },
+    "schemaVersion": { "const": 2 },
+    "id": { "$ref": "#/$defs/id" },
+    "semantic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "purpose", "scope", "outOfScope", "nodes", "edges", "groups", "rules", "openQuestions"],
+      "properties": {
+        "title": { "$ref": "#/$defs/short" }, "purpose": { "$ref": "#/$defs/long" },
+        "scope": { "$ref": "#/$defs/list" }, "outOfScope": { "$ref": "#/$defs/list" },
+        "nodes": { "type": "array", "maxItems": 500, "items": { "$ref": "#/$defs/node" } },
+        "edges": { "type": "array", "maxItems": 1500, "items": { "$ref": "#/$defs/edge" } },
+        "groups": { "type": "array", "maxItems": 100, "items": { "$ref": "#/$defs/group" } },
+        "rules": { "type": "array", "maxItems": 500, "items": { "$ref": "#/$defs/rule" } },
+        "openQuestions": { "type": "array", "maxItems": 500, "items": { "$ref": "#/$defs/question" } }
+      }
+    },
+    "presentation": {
+      "type": "object", "additionalProperties": false, "required": ["direction", "nodePositions", "groupGeometry", "edgeEndpoints", "viewport"],
+      "properties": {
+        "direction": { "enum": ["LR", "TB"] },
+        "nodePositions": { "type": "object", "additionalProperties": { "$ref": "#/$defs/point" } },
+        "groupGeometry": { "type": "object", "additionalProperties": { "$ref": "#/$defs/geometry" } },
+        "edgeEndpoints": { "type": "object", "additionalProperties": { "$ref": "#/$defs/edgeEndpoint" } },
+        "viewport": { "type": "object", "additionalProperties": false, "required": ["x", "y", "zoom"], "properties": { "x": { "type": "number" }, "y": { "type": "number" }, "zoom": { "type": "number", "exclusiveMinimum": 0, "maximum": 8 } } }
+      }
+    },
+    "metadata": { "type": "object", "additionalProperties": false, "required": ["createdAt", "updatedAt"], "properties": { "createdAt": { "type": "string", "format": "date-time" }, "updatedAt": { "type": "string", "format": "date-time" } } }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z]+_[A-Za-z0-9_-]{8,}$", "maxLength": 80 },
+    "short": { "type": "string", "maxLength": 200 },
+    "long": { "type": "string", "maxLength": 4000 },
+    "list": { "type": "array", "maxItems": 100, "items": { "$ref": "#/$defs/short" } },
+    "point": { "type": "object", "additionalProperties": false, "required": ["x", "y"], "properties": { "x": { "type": "number" }, "y": { "type": "number" } } },
+    "geometry": { "type": "object", "additionalProperties": false, "required": ["x", "y", "width", "height"], "properties": { "x": { "type": "number" }, "y": { "type": "number" }, "width": { "type": "number", "exclusiveMinimum": 0 }, "height": { "type": "number", "exclusiveMinimum": 0 } } },
+    "edgeEndpoint": { "type": "object", "additionalProperties": false, "required": ["sourceSide", "targetSide"], "properties": { "sourceSide": { "enum": ["top", "right", "bottom", "left"] }, "targetSide": { "enum": ["top", "right", "bottom", "left"] } } },
+    "target": { "type": "object", "additionalProperties": false, "required": ["kind"], "properties": { "kind": { "enum": ["document", "node", "edge", "group"] }, "id": { "$ref": "#/$defs/id" }, "needsReview": { "type": "boolean" } } },
+    "node": { "type": "object", "additionalProperties": false, "required": ["id", "type", "label", "description", "actor", "inputs", "outputs"], "properties": { "id": { "$ref": "#/$defs/id" }, "type": { "enum": ["start", "end", "process", "decision", "data", "database", "api", "external", "user", "system", "note"] }, "label": { "$ref": "#/$defs/short" }, "description": { "$ref": "#/$defs/long" }, "actor": { "$ref": "#/$defs/short" }, "inputs": { "$ref": "#/$defs/list" }, "outputs": { "$ref": "#/$defs/list" }, "status": { "$ref": "#/$defs/short" }, "groupId": { "$ref": "#/$defs/id" }, "condition": { "$ref": "#/$defs/long" } } },
+    "edge": { "type": "object", "additionalProperties": false, "required": ["id", "source", "target", "relation", "label"], "properties": { "id": { "$ref": "#/$defs/id" }, "source": { "$ref": "#/$defs/id" }, "target": { "$ref": "#/$defs/id" }, "relation": { "enum": ["next", "yes", "no", "reads", "writes", "calls", "returns", "depends_on", "triggers"] }, "label": { "$ref": "#/$defs/short" }, "condition": { "$ref": "#/$defs/long" } } },
+    "group": { "type": "object", "additionalProperties": false, "required": ["id", "label", "description"], "properties": { "id": { "$ref": "#/$defs/id" }, "label": { "$ref": "#/$defs/short" }, "description": { "$ref": "#/$defs/long" } } },
+    "rule": { "type": "object", "additionalProperties": false, "required": ["id", "text", "status", "target"], "properties": { "id": { "$ref": "#/$defs/id" }, "text": { "$ref": "#/$defs/long" }, "status": { "enum": ["draft", "confirmed", "unresolved"] }, "target": { "$ref": "#/$defs/target" } } },
+    "question": { "type": "object", "additionalProperties": false, "required": ["id", "text", "target"], "properties": { "id": { "$ref": "#/$defs/id" }, "text": { "$ref": "#/$defs/long" }, "target": { "$ref": "#/$defs/target" } } }
+  }
+}

@@ -1,0 +1,21 @@
+SHARA
+Copyright 2026 やまのすみか株式会社
+
+Software source code, configuration, tests and build scripts are licensed
+under the Apache License, Version 2.0, unless a file states otherwise.
+This includes src/, scripts/, tests/, tests-pwa/, .github/, the Rust source
+and manifests in src-tauri/, and root build configuration and lockfiles.
+
+README.md, AGENTS.md, the project-authored text of THIRD_PARTY_NOTICES.md,
+docs/, samples/ and project-authored artwork in public/ and src-tauri/icons/
+are licensed under CC BY 4.0. See LICENSE-CONTENT for
+the exact content scope and configuration exceptions.
+
+Third-party software and content, including their license and attribution
+texts, remain subject to their original terms. They are not relicensed under
+the SHARA software or content licenses. See THIRD_PARTY_NOTICES.md.
+
+These licenses grant no trademark rights in SHARA names, logos or other brand
+identifiers, except for customary attribution permitted by the applicable
+license. The copyright license for original artwork is separate from any
+trademark rights.

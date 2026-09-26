@@ -1,0 +1,14 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "SHARAのメイン画面に必要な最小権限",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "core:window:allow-destroy",
+    "clipboard-manager:allow-write-text",
+    "allow-open-document-dialog",
+    "allow-save-document",
+    "allow-save-document-as-dialog"
+  ]
+}

@@ -1,0 +1,32 @@
+SHARA Documentation and Project Content License
+
+Copyright 2026 やまのすみか株式会社
+
+Unless a file states otherwise, the following project-authored content is
+licensed under Creative Commons Attribution 4.0 International (CC BY 4.0):
+
+- README.md, AGENTS.md and the project-authored text of THIRD_PARTY_NOTICES.md
+- files under docs/ (including the documented JSON Schema)
+- files under samples/ (example documents, exported text and screenshots)
+- original artwork under public/ and src-tauri/icons/
+
+License deed: https://creativecommons.org/licenses/by/4.0/
+Legal code: https://creativecommons.org/licenses/by/4.0/legalcode.en
+
+Preferred attribution:
+"SHARA documentation and artwork, やまのすみか株式会社,
+licensed under CC BY 4.0."
+Project: https://github.com/yamanosumika/shara
+
+Software source code, configuration, tests and build scripts are licensed
+under Apache License 2.0; see LICENSE and NOTICE. For example, the fixture
+implementation in src/fixtures/ is code, while its exported sample documents
+under samples/ are content. public/manifest.webmanifest and XML platform
+configuration under src-tauri/icons/ are software configuration, not artwork.
+
+Third-party materials and reproduced third-party license texts retain their
+own terms and are excluded from this license. See THIRD_PARTY_NOTICES.md.
+
+The copyright license for original artwork does not grant trademark rights
+in SHARA names, logos, service marks or other brand identifiers. No endorsement
+by the licensor is implied.
