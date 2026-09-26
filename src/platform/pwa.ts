@@ -1,9 +1,18 @@
+import { isTauri } from './runtime';
+
 export interface PwaUpdate {
   apply(): void;
 }
 
 export async function registerPwa(onUpdate: (update: PwaUpdate) => void): Promise<() => void> {
-  if (!('serviceWorker' in navigator) || !import.meta.env.PROD) return () => undefined;
+  if (!('serviceWorker' in navigator)) return () => undefined;
+  if (isTauri()) {
+    const scope = new URL('./', window.location.href).href;
+    const registration = await navigator.serviceWorker.getRegistration(scope);
+    if (registration?.scope === scope) await registration.unregister();
+    return () => undefined;
+  }
+  if (!import.meta.env.PROD) return () => undefined;
   const registration = await navigator.serviceWorker.register('./sw.js', { scope: './' });
   const notify = () => {
     if (!registration.waiting) return;

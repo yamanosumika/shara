@@ -63,6 +63,8 @@ npm run tauri:dev
 
 復旧候補はWebViewまたはブラウザの `localStorage` に保持し、元ファイルを自動上書きしません。ブラウザデータの消去で失われるため、通常のファイル保存やバックアップとは別に扱います。
 
+Tauri版はWeb用Service Workerを新規登録せず、同じscopeの旧登録を解除します。旧版のキャッシュで古い画面が出る場合は、編集中の文書を保存したうえで `Ctrl+Shift+R` を一度押してください。修正版を読み込むと旧登録が解除され、以降の起動で同梱画面を使用します。復旧候補は消去しません。
+
 ## 出力
 
 - Mermaid: `flowchart LR` / `flowchart TB`、固定ID、関係ラベル、subgraphを出力します。
